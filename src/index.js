@@ -1,15 +1,25 @@
-import React from 'react';
+import React, {
+  Suspense,
+  createContext
+} from 'react';
 import ReactDOM from 'react-dom';
-import { configure } from 'mobx';
+
+import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
+
+import searchStore from './stores/searchStore';
+
 import App from './App';
-import * as serviceWorker from './serviceWorker';
 
-configure({ enforceActions: 'observed' });
+export const RootContext = createContext({});
 
-ReactDOM.render(<App />, document.getElementById('root'));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(
+  (
+    <RootContext.Provider value={{ searchStore }}>
+      <Suspense fallback={<div>Loading...</div>}>
+        <App/>
+      </Suspense>
+    </RootContext.Provider>
+  ), 
+  document.getElementById('root')
+);
