@@ -1,4 +1,6 @@
-Github Repo Search
+# Github Repo Search
+
+See Demo: https://bodyazinchenko.github.io/github-repo-search
 
 ## Available Scripts
 
