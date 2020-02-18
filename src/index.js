@@ -1,7 +1,4 @@
-import React, {
-  Suspense,
-  createContext
-} from 'react';
+import React, { createContext } from 'react';
 import ReactDOM from 'react-dom';
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -16,9 +13,7 @@ export const RootContext = createContext({});
 ReactDOM.render(
   (
     <RootContext.Provider value={{ searchStore }}>
-      <Suspense fallback={<div>Loading...</div>}>
-        <App/>
-      </Suspense>
+      <App/>
     </RootContext.Provider>
   ), 
   document.getElementById('root')

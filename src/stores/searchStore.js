@@ -3,9 +3,9 @@ import { fetchRepos } from '../api/searchApi';
 
 class SearchStore {
   searchFieldValue = '';
+  errorMessage = '';
   loading = false;
   nothingFound = false;
-  errorMessage = '';
   currentPage = 1;
   lastPage = 1;
   results = [];
@@ -38,7 +38,7 @@ class SearchStore {
       this.results = response.items;
       this.cachedResults.set(this.currentPage, response.items);
       this.nothingFound = response.items.length === 0;
-      if (response.pagination.last !== undefined) {
+      if (Boolean(response.pagination) && Boolean(response.pagination.last)) {
         this.lastPage = Number(response.pagination.last.page);
       }
     } catch(err) {
