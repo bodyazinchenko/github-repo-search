@@ -21,7 +21,7 @@ const SearchForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    searchStore.searchRepos();
+    searchStore.searchRepos(true);
   }
 
   return (

@@ -6,6 +6,7 @@ import { RootContext } from '../../index';
 import Loader from '../Loader';
 import Message from '../Message';
 import RepoItem from '../RepoItem';
+import Pagination from '../Pagination';
 
 const SearchResults = () => {
   const { searchStore } = useContext(RootContext);
@@ -23,21 +24,28 @@ const SearchResults = () => {
   }
 
   return (
-    <div className="container-fluid repos-wrap">
-      <div className="row">
-        {searchStore.repositories.map(repository => (
-          <RepoItem 
-            key={repository.id}
-            name={repository.full_name}
-            description={repository.description}
-            url={repository.html_url}
-            updatedAt={repository.updated_at}
-            starsCount={repository.stargazers_count}
-            language={repository.language}
-          />
-        ))}
-      </div>
-    </div>
+    <>
+      {searchStore.repositories.length > 0 && (
+        <div className="container-fluid repos-wrap">
+          <div className="row">
+            {searchStore.repositories.map(repository => (
+              <RepoItem 
+                key={repository.id}
+                name={repository.full_name}
+                description={repository.description}
+                url={repository.html_url}
+                updatedAt={repository.updated_at}
+                starsCount={repository.stargazers_count}
+                language={repository.language}
+              />
+            ))}
+          </div>
+          <div className="row">
+            <Pagination />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

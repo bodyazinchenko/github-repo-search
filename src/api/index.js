@@ -1,3 +1,5 @@
+import parseLinkHeader from 'parse-link-header';
+
 const API_PATH = 'https://api.github.com';
 
 export function getRequest(path, params) {
@@ -16,7 +18,7 @@ export function request(path, method, params) {
     body: JSON.stringify(params)
   })
     .then(checkHttpStatus)
-    .then(response => response.json());
+    .then(parseJSON);
 }
 
 function checkHttpStatus(response) {
@@ -25,4 +27,11 @@ function checkHttpStatus(response) {
   }
 
   return response.json().then((data) => Promise.reject(new Error(data.message)));
+}
+
+function parseJSON(response) {
+  return response.json().then((data) => ({
+    ...data,
+    pagination: parseLinkHeader(response.headers.get('link'))
+  }))
 }

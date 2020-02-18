@@ -13,7 +13,7 @@ const RepoItem = ({
   starsCount,
   language
 }) => (
-  <div className="col-4 mb-4">
+  <div className="col-lg-4 col-md-6 col-sm-12 mb-4">
     <Card body>
       <CardTitle>
         <a href={url} target="_blank" rel="noopener noreferrer">{name}</a>
